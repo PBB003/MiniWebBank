@@ -1,0 +1,7 @@
+### Crear una nueva cuenta (Enviamos los datos por la URL)
+POST http://localhost:5025/accounts?number=123&name=Pedro&initialBalance=500
+
+###
+
+### Obtener la lista de todas las cuentas
+GET http://localhost:5025/accounts

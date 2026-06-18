@@ -1,0 +1,15 @@
+# Binaries
+[Oo]bj/
+[Bb]in/
+
+# SQLite Databases
+*.db
+*.db-shm
+*.db-wal
+
+# VS Code
+.vscode/
+
+# Environment files
+.env
+appsettings.Development.json
