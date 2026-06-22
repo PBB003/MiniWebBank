@@ -3,6 +3,7 @@ namespace MiniWebBank.Models;
 public class BankAccount : IBankAccount
 {
     public int Id { get; set; }
+    public string Pin {get; set; }
     public string AccountNumber { get; set; }
     public string OwnerName { get; set; }
     public decimal Balance { get; protected set; }
@@ -11,14 +12,15 @@ public class BankAccount : IBankAccount
 
     public BankAccount() { }
 
-    public BankAccount(string newAccountNumber, string newOwnerName, decimal initialBalance) 
+    public BankAccount(string newAccountNumber, string newOwnerName, decimal initialBalance, string pin) 
     {
         AccountNumber = newAccountNumber;
         OwnerName = newOwnerName;
         if (initialBalance > 0) 
         {
             MakeDeposit(initialBalance, "Initial Balance");
-        }
+        };
+        Pin = pin;
     }
 
     public virtual void MakeDeposit(decimal amount, string note) {

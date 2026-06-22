@@ -18,6 +18,21 @@
         <p>Tu dinero, en la web.</p>
       </header>
       <div class="dashboard-grid">
+        <section class="card" id="login-section">
+          <h2>Iniciar Sesión</h2>
+          <form id="login-form">
+            <div class="form-group">
+              <label>Número de Cuenta</label>
+              <input type="text" id="login-number" required />
+            </div>
+            <div class="form-group">
+              <label>PIN</label>
+              <input type="password" id="login-pin" required />
+            </div>
+            <button type="submit">Entrar</button>
+          </form>
+        </section>
+
         <!-- PANEL IZQUIERDO: Formulario -->
         <section class="card">
           <h2>Abrir Nueva Cuenta</h2>
@@ -33,6 +48,10 @@
             <div class="form-group">
               <label>Depósito Inicial ($)</label>
               <input type="number" id="acc-balance" required />
+            </div>
+            <div class="form-group">
+              <label>PIN de Seguridad</label>
+              <input type="password" id="acc-pin" required />
             </div>
             <button type="submit">Crear Cuenta</button>
           </form>

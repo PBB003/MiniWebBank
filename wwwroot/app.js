@@ -39,8 +39,9 @@ document.getElementById('create-account-form').addEventListener('submit', async 
     const number = document.getElementById('acc-number').value;
     const name = document.getElementById('acc-name').value;
     const balance = document.getElementById('acc-balance').value;
+    const pin = document.getElementById('acc-pin').value;
 
-    await fetch(`/accounts?number=${number}&name=${name}&initialBalance=${balance}`, {
+    await fetch(`/accounts?number=${number}&name=${name}&initialBalance=${balance}&pin=${pin}`, {
         method: 'POST'
     });
 
@@ -56,9 +57,27 @@ document.getElementById('make-deposit').addEventListener('submit', async (e) => 
     const note = document.getElementById('note').value;
 
     await fetch(`/accounts/${number}/deposit?amount=${amount}&note=${note}`, {
-        method: 'POST'
+        method: 'POST',
+        credentials: 'include'
     });
 
     document.getElementById('make-deposit').reset();
     loadAccounts();
+});
+
+document.getElementById('login-form').addEventListener('submit', async (e) => { 
+    e.preventDefault();
+
+    const number = document.getElementById('login-number').value;
+    const pin = document.getElementById('login-pin').value;
+
+    const response = await fetch(`/login?number=${number}&pin=${pin}`, {
+        method: 'POST'
+    });
+
+    if (response.ok) {
+        alert("¡Cookie recibido! Ya puedes hacer depósitos.");
+    } else {
+        alert("Número de cuenta o PIN incorrectos.");
+    }
 });
