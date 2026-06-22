@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ventanilla del Cajero</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>👨‍💼 Ventanilla de Caja</h1>
+      <p>Operaciones físicas: Depósitos y Retiros</p>
+    </header>
+    
+    <div class="dashboard-grid">
+      <!-- PANEL: Buscar y Operar -->
+      <section class="card">
+        <h2>Operar en Cuenta</h2>
+        <form id="cashier-form">
+          <div class="form-group">
+            <label>N° Cuenta del Cliente</label>
+            <input type="text" id="client-number" required />
+          </div>
+          <div class="form-group">
+            <label>Monto ($)</label>
+            <input type="number" id="op-amount" required />
+          </div>
+          <div class="form-group">
+            <label>Concepto (Nota)</label>
+            <input type="text" id="op-note" required />
+          </div>
+          <div style="display: flex; gap: 1rem;">
+            <button type="button" id="btn-deposit" style="background: var(--success-color)">Depositar</button>
+            <button type="button" id="btn-withdraw" style="background: var(--danger-color)">Retirar</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- PANEL: Resumen -->
+      <section class="card summary-card">
+        <h2>Panel de Control</h2>
+        <p>Asegúrate de validar la identidad del cliente antes de retirar dinero.</p>
+        <button onclick="window.location.href='/logout'" style="background: var(--danger-color); margin-top: 2rem;">Cerrar Sesión Segura</button>
+      </section>
+    </div>
+  </div>
+  <script src="cajero.js"></script>
+</body>
+</html>

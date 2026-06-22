@@ -1,56 +1,33 @@
-# 🏦 MiniWebBank
+# 🏦 MiniWebBank (Full-Stack Banking App)
 
-¡Bienvenido a **MiniWebBank**! Este es un proyecto **Full-Stack** construido desde cero, diseñado para formar parte de mi portafolio profesional como desarrollador de software.
+Una aplicación bancaria de nivel de producción construida con **C# ASP.NET Core** y **JavaScript Vanilla**, diseñada como proyecto destacado para mi portafolio profesional.
 
-Este proyecto demuestra mi capacidad para construir sistemas completos abarcando desde el diseño de la interfaz de usuario hasta la arquitectura de bases de datos y seguridad en el lado del servidor.
+## ✨ Características Técnicas (Arquitectura)
 
----
+Este proyecto no es solo un CRUD básico; simula la arquitectura de un banco real implementando estándares de la industria:
 
-## 🚀 Tecnologías Utilizadas
+* **Arquitectura de Base de Datos en la Nube:** Migración exitosa de SQLite local a un clúster de **PostgreSQL Serverless alojado en AWS (Neon)** usando Entity Framework Core.
+* **Control de Acceso Basado en Roles (RBAC):** Implementación de seguridad estricta con tres niveles de autorización:
+  * `Admin`: Acceso total al CRM para auditar y crear cuentas.
+  * `Cajero`: Permisos exclusivos para realizar depósitos y retiros físicos en ventanilla.
+  * `Client`: Acceso al Home Banking privado, con rutas protegidas para evitar acceso a fondos de terceros.
+* **Autenticación Segura:** Sistema de Login validado por **Cookies de Sesión Cifradas (ASP.NET Claims Identity)**, abandonando validaciones inseguras del lado del cliente.
+* **Transacciones Atómicas (ACID):** Lógica de transferencias monetarias respaldada por `IDbContextTransaction`, garantizando que en caso de fallos de red, el dinero jamás se pierda en el limbo (Rollback automático).
+* **Frontend Desacoplado:** Arquitectura "Single Responsibility" separando el Portal de Login (`index.html`), el CRM Administrativo (`admin.html`), la Ventanilla (`cajero.html`) y el Home Banking (`dashboard.html`).
+* **UI/UX Moderna:** Diseño implementando *Glassmorphism* (efecto cristal) con CSS puro, sin depender de librerías externas.
 
-### Backend (Servidor)
-* **Lenguaje:** C# (.NET 8)
-* **Framework:** ASP.NET Core (Minimal APIs)
-* **Base de Datos:** SQLite
-* **ORM:** Entity Framework Core
-* **Seguridad:** Autenticación por Cookies (Cookie Authentication)
+## 🛠️ Tecnologías Usadas
+- **Backend:** C# 11, .NET 8, ASP.NET Core Minimal APIs
+- **ORM:** Entity Framework Core
+- **Base de Datos:** PostgreSQL (Neon Tech / AWS)
+- **Frontend:** HTML5, CSS3, JavaScript (Fetch API)
 
-### Frontend (Cliente)
-* **Estructura:** HTML5 Semántico
-* **Estilos:** Vanilla CSS (Diseño moderno tipo *Glassmorphism* y Modo Oscuro)
-* **Lógica:** Vanilla JavaScript (ES6+ usando `fetch` y asincronismo)
-
----
-
-## ✨ Características Principales
-
-1. **Gestión de Cuentas:** Capacidad de crear nuevas cuentas bancarias asociadas a un número de cuenta, titular y un PIN de seguridad.
-2. **Autenticación (Login):** Sistema de inicio de sesión seguro usando Cookies en el navegador. Las operaciones financieras están bloqueadas (`[Authorize]`) hasta que el usuario se autentica exitosamente.
-3. **Operaciones Financieras:** Depósitos y retiros de dinero validados mediante lógica de negocio (ej. prevención de retiros mayores al saldo disponible o montos negativos).
-4. **Interfaz Dinámica (SPA):** La página no necesita recargarse. Todo se comunica mediante peticiones HTTP (REST) de fondo, actualizando el DOM en tiempo real.
-
----
-
-## 🛠️ Cómo ejecutar este proyecto localmente
-
-Si deseas probar este proyecto en tu propia computadora, sigue estos pasos:
-
-1. **Clonar el repositorio:**
-   ```bash
-   git clone https://github.com/TU_USUARIO/MiniWebBank.git
-   ```
-2. **Entrar a la carpeta del proyecto:**
-   ```bash
-   cd MiniWebBank
-   ```
-3. **Ejecutar el servidor de .NET:**
+## 🚀 Cómo Ejecutarlo Localmente
+1. Clona este repositorio.
+2. Asegúrate de tener el SDK de .NET instalado.
+3. Ejecuta en la terminal:
    ```bash
    dotnet run
    ```
-4. **Abrir la aplicación:**
-   Abre tu navegador de internet favorito y navega hacia `http://localhost:5025/index.html` (o el puerto que se asigne automáticamente).
-
----
-
-> *"Un viaje de mil millas comienza con un solo paso."*  
-> Este proyecto representa mi paso sólido hacia la construcción de aplicaciones empresariales modernas.
+4. Abre `http://localhost:5025/index.html` en tu navegador.
+*(Nota: Requiere configurar tus propios User Secrets de .NET para la cadena de conexión de PostgreSQL).*

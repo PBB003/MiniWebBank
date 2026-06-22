@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mi Panel - MiniWebBank</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🏦 Mi Cuenta Bancaria</h1>
+      <p>Bienvenido a tu panel personal.</p>
+    </header>
+    <div class="dashboard-grid">
+      <section class="card">
+        <h2>Transferir Dinero</h2>
+        <form id="make-transfer">
+          <div class="form-group">
+            <label>Cuenta Destino</label>
+            <input type="text" id="target-number" required />
+          </div>
+          <div class="form-group">
+            <label>Monto ($)</label>
+            <input type="number" id="transfer-amount" required />
+          </div>
+          <button type="submit">Enviar Dinero</button>
+        </form>
+      </section>
+
+      <section class="card summary-card">
+        <h2>Saldo Disponible</h2>
+        <h3 id="current-balance" class="amount" style="font-size: 2.5rem; color: var(--success-color); margin: 1rem 0;">Cargando...</h3>
+        <p>Tu dinero está seguro con nosotros.</p>
+        <button onclick="window.location.href='/logout'" style="background: var(--danger-color); margin-top: 2rem;">Cerrar Sesión</button>
+      </section>
+    </div>
+  </div>
+  <script src="dashboard.js"></script>
+</body>
+</html>

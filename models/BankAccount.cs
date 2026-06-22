@@ -7,12 +7,13 @@ public class BankAccount : IBankAccount
     public string AccountNumber { get; set; }
     public string OwnerName { get; set; }
     public decimal Balance { get; protected set; }
+    public string Role { get; set; }
 
     protected List<Transaction> allTransactions = new List<Transaction>();
 
     public BankAccount() { }
 
-    public BankAccount(string newAccountNumber, string newOwnerName, decimal initialBalance, string pin) 
+    public BankAccount(string newAccountNumber, string newOwnerName, decimal initialBalance, string pin, string role = "Client") 
     {
         AccountNumber = newAccountNumber;
         OwnerName = newOwnerName;
@@ -21,6 +22,7 @@ public class BankAccount : IBankAccount
             MakeDeposit(initialBalance, "Initial Balance");
         };
         Pin = pin;
+        Role = role;
     }
 
     public virtual void MakeDeposit(decimal amount, string note) {
