@@ -1,56 +1,56 @@
-<!doctype html>
-<html lang="es">
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CRM - Administrador del Banco</title>
+    <title>CRM - Administrative Portal</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="container">
       <header>
-        <h1>MiniWebBank - Portal Administrativo</h1>
-        <p>Gestión de Clientes (Acceso Restringido)</p>
+        <h1>MiniWebBank - Administrative Portal</h1>
+        <p>Client Management (Restricted Access)</p>
       </header>
       <div class="dashboard-grid">
-        <!-- PANEL: Crear Cuentas -->
+        <!-- PANEL: Open New Account -->
         <section class="card">
-          <h2>Abrir Nueva Cuenta</h2>
+          <h2>Open New Account</h2>
           <form id="create-account-form">
             <div class="form-group">
-              <label>Número de Cuenta</label>
+              <label>Account Number</label>
               <input type="text" id="acc-number" required />
             </div>
             <div class="form-group">
-              <label>Nombre del Titular</label>
+              <label>Owner Name</label>
               <input type="text" id="acc-name" required />
             </div>
             <div class="form-group">
-              <label>Depósito Inicial ($)</label>
+              <label>Initial Deposit ($)</label>
               <input type="number" id="acc-balance" required />
             </div>
             <div class="form-group">
-              <label>PIN de Seguridad</label>
+              <label>Security PIN</label>
               <input type="password" id="acc-pin" required />
             </div>
             <div class="form-group">
-              <label>Rol de Usuario</label>
+              <label>User Role</label>
               <select id="acc-role">
-              <option value="Client">Cliente Normal</option>
-              <option value="Cajero">Cajero (Ventanilla)</option>
-              <option value="Admin">Administrador Bancario</option>
+              <option value="Client">Standard Client</option>
+              <option value="Teller">Teller (Desk)</option>
+              <option value="Admin">Bank Administrator</option>
             </select>
             </div>
-            <button type="submit">Crear Cuenta</button>
+            <button type="submit">Create Account</button>
           </form>
         </section>
 
-        <!-- PANEL: Lista de Todas las Cuentas -->
+        <!-- PANEL: Client Database -->
         <section class="card">
-        <h2>Base de Datos de Clientes</h2>
+        <h2>Client Database</h2>
         <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-            <button onclick="loadAccounts()" style="flex: 1;">Refrescar Lista</button>
-            <button onclick="window.location.href='/logout'" style="flex: 1; background: var(--danger-color);">Cerrar Sesión</button>
+            <button onclick="loadAccounts()" style="flex: 1;">Refresh List</button>
+            <button onclick="window.location.href='/logout'" style="flex: 1; background: var(--danger-color);">Sign Out</button>
         </div>
         <ul id="accounts-list" class="transaction-list"></ul>
         </section>

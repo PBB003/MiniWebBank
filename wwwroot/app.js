@@ -1,5 +1,3 @@
-// app.js: Exclusivo para la página de Login (index.html)
-
 document.getElementById('login-form').addEventListener('submit', async (e) => { 
     e.preventDefault();
 
@@ -11,16 +9,16 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
     });
 
     if (response.ok) {
-        const data = await response.json(); // Leemos el Rol
+        const data = await response.json(); 
         
         if (data.role === "Admin") {
-            window.location.href = "/admin.html"; // Redirigir al CRM
-        } else if (data.role === "Cajero") {
-            window.location.href = "/cajero.html"; // Redirigir a Ventanilla
+            window.location.href = "/admin.html"; // Redirect to CRM
+        } else if (data.role === "Teller") {
+            window.location.href = "/teller.html"; // Redirect to Teller UI
         } else {
-            window.location.href = "/dashboard.html"; // Redirigir al Home Banking
+            window.location.href = "/dashboard.html"; // Redirect to Home Banking
         }
     } else {
-        alert("Número de cuenta o PIN incorrectos. Acceso Denegado.");
+        alert("Incorrect account number or PIN. Access Denied.");
     }
 });

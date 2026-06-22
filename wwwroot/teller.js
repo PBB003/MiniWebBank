@@ -4,7 +4,7 @@ async function executeOperation(type) {
     const note = document.getElementById('op-note').value;
 
     if (!number || !amount) {
-        alert("Completa la cuenta y el monto.");
+        alert("Please enter account number and amount.");
         return;
     }
 
@@ -14,10 +14,10 @@ async function executeOperation(type) {
     });
 
     if (response.ok) {
-        alert(`Operación (${type === 'deposit' ? 'Depósito' : 'Retiro'}) exitosa.`);
+        alert(`${type === 'deposit' ? 'Deposit' : 'Withdrawal'} successful.`);
         document.getElementById('cashier-form').reset();
     } else {
-        alert("Error en la operación. Verifica la cuenta, saldo, o tus permisos.");
+        alert("Operation failed. Verify account, balance or permissions.");
     }
 }
 

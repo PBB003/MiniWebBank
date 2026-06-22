@@ -5,7 +5,7 @@ async function loadMyData() {
         const data = await response.json();
         document.getElementById('current-balance').innerText = `$${data.balance.toFixed(2)}`;
     } else {
-        alert("Sesión expirada.");
+        alert("Session expired.");
         window.location.href = '/index.html';
     }
 }
@@ -21,11 +21,11 @@ document.getElementById('make-transfer').addEventListener('submit', async (e) =>
     });
 
     if (response.ok) {
-        alert("Transferencia exitosa.");
+        alert("Transfer successful.");
         document.getElementById('make-transfer').reset();
         loadMyData(); 
     } else {
-        alert("Error en la transferencia.");
+        alert("Transfer failed. Please check the target account and your available balance.");
     }
 });
 

@@ -84,7 +84,7 @@ public class BankAccount : IBankAccount
         }
 
         MakeWithdrawal(amount, $"Transfer to {destinationAccount.AccountNumber}");
-        destinationAccount.MakeDeposit(amount, $"Recived from {AccountNumber}");
+        destinationAccount.MakeDeposit(amount, $"Received from {AccountNumber}");
     }
 
     public void SaveHistoryToFile()

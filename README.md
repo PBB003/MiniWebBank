@@ -1,33 +1,61 @@
-# 🏦 MiniWebBank (Full-Stack Banking App)
+# MiniWebBank (Full-Stack Banking App)
 
-Una aplicación bancaria de nivel de producción construida con **C# ASP.NET Core** y **JavaScript Vanilla**, diseñada como proyecto destacado para mi portafolio profesional.
+A production-grade banking application built with **C# ASP.NET Core** and **Vanilla JavaScript**, designed as a portfolio showcase demonstrating modern backend architecture and secure web practices.
 
-## ✨ Características Técnicas (Arquitectura)
+## Screenshots
 
-Este proyecto no es solo un CRUD básico; simula la arquitectura de un banco real implementando estándares de la industria:
+| Login Portal | Home Banking (Client) |
+|---|---|
+| ![Login Screen](./screenshots/login.png) | ![Dashboard](./screenshots/dashboard.png) |
 
-* **Arquitectura de Base de Datos en la Nube:** Migración exitosa de SQLite local a un clúster de **PostgreSQL Serverless alojado en AWS (Neon)** usando Entity Framework Core.
-* **Control de Acceso Basado en Roles (RBAC):** Implementación de seguridad estricta con tres niveles de autorización:
-  * `Admin`: Acceso total al CRM para auditar y crear cuentas.
-  * `Cajero`: Permisos exclusivos para realizar depósitos y retiros físicos en ventanilla.
-  * `Client`: Acceso al Home Banking privado, con rutas protegidas para evitar acceso a fondos de terceros.
-* **Autenticación Segura:** Sistema de Login validado por **Cookies de Sesión Cifradas (ASP.NET Claims Identity)**, abandonando validaciones inseguras del lado del cliente.
-* **Transacciones Atómicas (ACID):** Lógica de transferencias monetarias respaldada por `IDbContextTransaction`, garantizando que en caso de fallos de red, el dinero jamás se pierda en el limbo (Rollback automático).
-* **Frontend Desacoplado:** Arquitectura "Single Responsibility" separando el Portal de Login (`index.html`), el CRM Administrativo (`admin.html`), la Ventanilla (`cajero.html`) y el Home Banking (`dashboard.html`).
-* **UI/UX Moderna:** Diseño implementando *Glassmorphism* (efecto cristal) con CSS puro, sin depender de librerías externas.
+| CRM (Admin) | Teller Window |
+|---|---|
+| ![Admin Portal](./screenshots/admin.png) | ![Teller Window](./screenshots/teller.png) |
 
-## 🛠️ Tecnologías Usadas
+*(Note: Replace the placeholder URLs above with actual screenshots placed in a `screenshots` folder).*
+
+## Architecture Overview
+
+```mermaid
+flowchart TD
+    A[Frontend: HTML/JS/CSS Glassmorphism] -->|HTTP Requests / Fetch API| B(Backend: ASP.NET Core Minimal APIs)
+    B -->|Cookie Authentication & RBAC| C{Entity Framework Core}
+    C -->|IDbContextTransaction| D[(Neon Serverless PostgreSQL)]
+```
+
+## Key Learnings & Features
+
+- **Role-Based Access Control (RBAC):** Implemented strict authorization with three distinct levels (`Admin`, `Teller`, and `Client`), ensuring endpoints like withdrawals can only be accessed by bank employees.
+- **Database Transactions (ACID):** Developed a robust transfer system using `IDbContextTransaction` to guarantee atomic operations (preventing money loss during partial failures).
+- **Authentication with Claims Identity:** Transitioned from insecure client-side validation to encrypted ASP.NET Core Session Cookies.
+- **PostgreSQL Cloud Deployment:** Successfully migrated from a local SQLite database to a fully managed Serverless PostgreSQL cluster hosted on AWS via Neon Tech.
+- **Entity Framework Core:** Utilized EF Core as the ORM to bridge object-oriented code with relational database tables efficiently.
+- **Decoupled Frontend:** Applied Single Responsibility Principle (SRP) to the frontend architecture, splitting views by roles (`index.html`, `admin.html`, `teller.html`, `dashboard.html`).
+
+## Technologies Used
 - **Backend:** C# 11, .NET 8, ASP.NET Core Minimal APIs
 - **ORM:** Entity Framework Core
-- **Base de Datos:** PostgreSQL (Neon Tech / AWS)
-- **Frontend:** HTML5, CSS3, JavaScript (Fetch API)
+- **Database:** PostgreSQL (Neon Tech / AWS)
+- **Frontend:** HTML5, CSS3, Vanilla JavaScript (Fetch API)
 
-## 🚀 Cómo Ejecutarlo Localmente
-1. Clona este repositorio.
-2. Asegúrate de tener el SDK de .NET instalado.
-3. Ejecuta en la terminal:
+## API Endpoints Showcase
+
+Here is a glimpse of the core REST endpoints developed for the system:
+
+| Endpoint | Method | Role Required | Description |
+|---|---|---|---|
+| `/login` | `POST` | None | Authenticates user and issues a secure session Cookie. |
+| `/accounts` | `GET` | **Admin** | Retrieves all registered bank accounts. |
+| `/accounts/me` | `GET` | Authenticated | Retrieves current balance for the logged-in user. |
+| `/accounts/{number}/deposit` | `POST` | **Admin, Teller** | Deposits physical money into an account. |
+| `/accounts/transfer` | `POST` | Authenticated | Performs an atomic transfer between two accounts. |
+
+## 🚀 How to Run Locally
+1. Clone this repository.
+2. Ensure you have the .NET SDK installed.
+3. Set up your Neon PostgreSQL connection string using .NET user-secrets.
+4. Run the following command in the terminal:
    ```bash
    dotnet run
    ```
-4. Abre `http://localhost:5025/index.html` en tu navegador.
-*(Nota: Requiere configurar tus propios User Secrets de .NET para la cadena de conexión de PostgreSQL).*
+5. Open `http://localhost:5025/index.html` in your browser.

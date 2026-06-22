@@ -3,7 +3,7 @@ async function loadAccounts() {
         const response = await fetch('/accounts', { credentials: 'include' });
         
         if (response.status === 401 || response.status === 403) {
-            alert('Acceso Denegado: Inicia sesión como Admin en el portal principal (index.html) primero.');
+            alert('Access Denied: Please sign in as Admin first.');
             return;
         }
 
@@ -12,15 +12,14 @@ async function loadAccounts() {
         list.innerHTML = '';
         accounts.forEach(acc => {
             const li = document.createElement('li');
-            li.innerHTML = `<strong>${acc.ownerName}</strong> (Cuenta: ${acc.accountNumber})<br/>Rol: ${acc.role} - Saldo: $${acc.balance.toFixed(2)}`;
+            li.innerHTML = `<strong>${acc.ownerName}</strong> (Account: ${acc.accountNumber})<br/>Role: ${acc.role} - Balance: $${acc.balance.toFixed(2)}`;
             list.appendChild(li);
         });
     } catch (e) {
-        console.error("Error cargando cuentas", e);
+        console.error("Error loading accounts", e);
     }
 }
 
-// Crear nueva cuenta (Solo Admin)
 document.getElementById('create-account-form').addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -32,16 +31,15 @@ document.getElementById('create-account-form').addEventListener('submit', async 
 
     const response = await fetch(`/accounts?number=${number}&name=${name}&initialBalance=${balance}&pin=${pin}&role=${role}`, {
         method: 'POST',
-        credentials: 'include'
+        credentials: 'include' 
     });
 
     if (response.ok) {
         document.getElementById('create-account-form').reset();
         loadAccounts();
     } else {
-        alert("Error al crear cuenta. ¿Acaso no eres Admin?");
+        alert("Error creating account. Are you sure you're an Admin?");
     }
 });
 
-// Cargar cuentas al iniciar
 loadAccounts();
